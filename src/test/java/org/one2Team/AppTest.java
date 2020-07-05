@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty", "html:target/html/results.html"},
         features = {"src/test/java/org/one2Team/"},
-        glue = {""},
-        tags = "@home"
+        glue = {"org.one2Team"},
+        tags = "@board "
 )
 
 public class AppTest 

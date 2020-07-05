@@ -7,7 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
 import static org.one2Team.Hooks.driver;
 import static org.junit.Assert.assertTrue;
 
@@ -32,7 +32,9 @@ public class HomeStepdefs {
 
     @When("user select dropdown profile")
     public void userSelectDropdownProfile() {
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/section/section/div/header[2]/div/div")).click();
+        driver.findElement(By.cssSelector("#root > div > section > section > div > header:nth-child(2) > div > div > i")).click();
+
+
     }
 
     @And("user clicks on Disconnect button")
@@ -42,20 +44,24 @@ public class HomeStepdefs {
 
     @Then("user is redirected to One2Team LogIn page")
     public void userIsRedirectedToOneTeamLogInPage() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        String urlLogin = driver.getCurrentUrl();
-        assertTrue(urlLogin.startsWith("https://o2t-chewie.eu.auth0.com/login?"));
+        assertTrue(driver.getCurrentUrl().contains("login"));
     }
 
-    @When("user clicks on WebSite button")
-    public void userClicksOnWebSiteButton() {
-        driver.findElement(By.cssSelector("#root > div > section > section > div > main > div > div > div.shortcuts-section > div.shortcuts.collapsed > div:nth-child(1) > div > div.shortcut-content > div:nth-child(1) > div")).click();
+
+    @When("user clicks on {string} {string}")
+    public void userClicksOn(String arg0, String arg1) {
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/section/section/div/main/div/div/div[2]/div[2]/button")).click();
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/section/section/div/main/div/div/div[2]/div[1]/" + arg1 + "/div")).click();
     }
 
-    @Then("user is redirected to One2Team WebSite")
-    public void userIsRedirectedToOneTeamWebSite() {
-        String urlLogin = driver.getCurrentUrl();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        assertTrue(urlLogin.startsWith("https://one2team.com/"));
+    @Then("user is redirected to {string}")
+    public void userIsRedirectedTo(String arg0) {
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+        int size = tabs.size();
+        driver.switchTo().window(tabs.get(size-1));
+        assertTrue(driver.getCurrentUrl().contains(arg0));
+
     }
+
+
 }
