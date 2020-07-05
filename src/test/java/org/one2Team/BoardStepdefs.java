@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -22,19 +23,20 @@ public class BoardStepdefs {
         assertTrue(driver.getCurrentUrl().contains("slideboard-new"));
     }
 
-    @When("user create new card {string}")
-    public void userCreateNewCard(String arg0) throws InterruptedException {
+    @When("user create new card")
+    public void userCreateNewCard() throws InterruptedException {
         driver.findElement(By.className("add-icon")).click();
         driver.switchTo().activeElement();
-        Thread.sleep(4000);
         driver.findElement(By.className("ant-input")).clear();
-        driver.findElement(By.className("ant-input")).sendKeys(arg0);
+        driver.findElement(By.className("ant-input")).sendKeys("newCard");
         driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[3]/div/div[2]/button[2]")).click();
+
     }
     @Then("card should be create")
     public void cardShouldBeCreate() {
-        String idCard = driver.findElement(By.tagName("id")).getText();
-        assertTrue(driver.findElement(By.id(idCard )).isEnabled());
+        WebElement idCard = driver.findElement(By.xpath("//div[contains(@id,'ogp')]"));
+        //System.out.println(idCard.getText());
+        assertTrue(idCard.isEnabled());
 
 
 
