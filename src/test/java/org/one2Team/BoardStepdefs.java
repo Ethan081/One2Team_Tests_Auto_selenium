@@ -1,18 +1,13 @@
 package org.one2Team;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.TimeUnit;
-
 import static org.junit.Assert.*;
 import static org.one2Team.Hooks.driver;
 
@@ -35,7 +30,6 @@ public class BoardStepdefs {
         driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[1]/div[1]/div[2]/div/span")).click();
         driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div/span/input")).sendKeys("newCard_" + dateCardBeCreate);
         driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[3]/div/div[2]/button[2]")).click();
-
         Thread.sleep((5000));
     }
 
