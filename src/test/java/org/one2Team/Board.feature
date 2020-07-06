@@ -1,5 +1,6 @@
 Feature: Board
 
+<<<<<<< HEAD
 #  Scenario: Create new Card
 #    Given user is connected to LogIn
 #    And user click on Board Button
@@ -18,4 +19,17 @@ Feature: Board
     When user creates a new card
     And user drag&drop card
     Then card is correctly dragged and dropped
+=======
+  Scenario: Create new Card
+    Given user is connected to LogIn
+    And user click on Board Button
+    When user create new card
+    Then card should be create
+
+
+  Scenario: Card drop column
+    Given user is connected to LogIn and card created
+    When user drop card to october column
+    Then card should be prodded to new column
+>>>>>>> 75aa3dd85fad6f6da6ddaef98336025a09f4c7f3
 
