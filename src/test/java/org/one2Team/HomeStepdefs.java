@@ -33,8 +33,6 @@ public class HomeStepdefs {
     @When("user select dropdown profile")
     public void userSelectDropdownProfile() {
         driver.findElement(By.cssSelector("#root > div > section > section > div > header:nth-child(2) > div > div > i")).click();
-
-
     }
 
     @And("user clicks on Disconnect button")
@@ -50,7 +48,9 @@ public class HomeStepdefs {
 
     @When("user clicks on {string} {string}")
     public void userClicksOn(String arg0, String arg1) {
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/section/section/div/main/div/div/div[2]/div[2]/button")).click();
+        if(driver.findElement(By.cssSelector("#root > div > section > section > div > main > div > div > div.shortcuts-section > div.shortcuts.collapsed")).getAttribute("class").equals("shortcuts collapsed")){
+            driver.findElement(By.xpath("//*[@id=\"root\"]/div/section/section/div/main/div/div/div[2]/div[2]/button")).click();
+        }
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/section/section/div/main/div/div/div[2]/div[1]/" + arg1 + "/div")).click();
     }
 

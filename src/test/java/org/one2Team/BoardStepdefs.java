@@ -16,7 +16,7 @@ import static org.one2Team.Hooks.driver;
 
 
 public class BoardStepdefs {
-
+/*
     @And("user click on Board Button")
     public void userClickOnBoardButton() {
         driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
@@ -71,4 +71,6 @@ public class BoardStepdefs {
         assertEquals(driver.findElement(By.id("/ogp/8558138")), driver.findElement(By.id("/ogp/8558138")));
 
     }
+ */
+
 }
