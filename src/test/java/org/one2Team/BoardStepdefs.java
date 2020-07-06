@@ -16,31 +16,27 @@ import static org.one2Team.Hooks.driver;
 
 
 public class BoardStepdefs {
-/*
-    @And("user click on Board Button")
-    public void userClickOnBoardButton() {
-        driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
-        assertTrue(driver.getCurrentUrl().contains("slideboard-new"));
-    }
 
-    @When("user create new card")
-    public void userCreateNewCard() throws InterruptedException {
-        driver.findElement(By.className("add-icon")).click();
-        driver.switchTo().activeElement();
-        driver.findElement(By.className("ant-input")).clear();
-        driver.findElement(By.className("ant-input")).sendKeys("newCard");
-        driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[3]/div/div[2]/button[2]")).click();
+//    @And("user click on Board Button")
+//    public void userClickOnBoardButton() {
+//        driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
+//        assertTrue(driver.getCurrentUrl().contains("slideboard-new"));
+//    }
 
-    }
+//    @When("user create new card")
+//    public void userCreateNewCard() throws InterruptedException {
+//        driver.findElement(By.className("add-icon")).click();
+//        driver.switchTo().activeElement();
+//        driver.findElement(By.className("ant-input")).clear();
+//        driver.findElement(By.className("ant-input")).sendKeys("newCard");
+//        driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[3]/div/div[2]/button[2]")).click();
+//
+//    }
     @Then("card should be create")
     public void cardShouldBeCreate() {
         WebElement idCard = driver.findElement(By.xpath("//div[contains(@id,'ogp')]"));
         //System.out.println(idCard.getText());
         assertTrue(idCard.isEnabled());
-
-
-
-
     }
 
     @Given("user is connected to LogIn and card created")
@@ -71,6 +67,6 @@ public class BoardStepdefs {
         assertEquals(driver.findElement(By.id("/ogp/8558138")), driver.findElement(By.id("/ogp/8558138")));
 
     }
- */
+
 
 }
