@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -16,22 +18,23 @@ import static org.one2Team.Hooks.driver;
 
 
 public class BoardStepdefs {
+    /*
 
-//    @And("user click on Board Button")
-//    public void userClickOnBoardButton() {
-//        driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
-//        assertTrue(driver.getCurrentUrl().contains("slideboard-new"));
-//    }
+    @And("user click on Board Button")
+    public void userClickOnBoardButton() {
+        driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
+        assertTrue(driver.getCurrentUrl().contains("slideboard-new"));
+    }
 
-//    @When("user create new card")
-//    public void userCreateNewCard() throws InterruptedException {
-//        driver.findElement(By.className("add-icon")).click();
-//        driver.switchTo().activeElement();
-//        driver.findElement(By.className("ant-input")).clear();
-//        driver.findElement(By.className("ant-input")).sendKeys("newCard");
-//        driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[3]/div/div[2]/button[2]")).click();
-//
-//    }
+    @When("user create new card")
+    public void userCreateNewCard() throws InterruptedException {
+        driver.findElement(By.className("add-icon")).click();
+        driver.switchTo().activeElement();
+        driver.findElement(By.className("ant-input")).clear();
+        driver.findElement(By.className("ant-input")).sendKeys("newCard");
+        driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[3]/div/div[2]/button[2]")).click();
+
+    }
     @Then("card should be create")
     public void cardShouldBeCreate() {
         WebElement idCard = driver.findElement(By.xpath("//div[contains(@id,'ogp')]"));
@@ -68,5 +71,24 @@ public class BoardStepdefs {
 
     }
 
+*/
 
+
+    @And("user is on board page")
+    public void userIsOnBoardPage() throws InterruptedException {
+        driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
+        assertTrue(driver.getCurrentUrl().contains("slideboard-new/a/"));
+        Thread.sleep((5000));
+    }
+
+    @When("user creates a new card")
+    public void userCreatesANewCard() throws InterruptedException {
+        driver.findElement(By.cssSelector("#columns-container > div > div.containCol__col.column-animation.col0 > div.containCol__col__plus > div.header.containCol__col__header.ng-scope > div > span")).click();
+        DateTimeFormatter dtf  = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        LocalDateTime ldt = LocalDateTime.now();
+        String dateDuJour = ldt.format(dtf);
+        driver.findElement(By.cssSelector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-body > div > div.ant-row.ant-form-item > div.ant-col.ant-form-item-control-wrapper > div > span > input")).sendKeys("new card" + dateDuJour);
+        driver.findElement(By.cssSelector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-footer > div > div.footer-action-buttons > button.ant-btn.ant-btn-primary")).click();
+        Thread.sleep((5000));
+    }
 }
