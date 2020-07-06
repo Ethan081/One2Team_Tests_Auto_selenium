@@ -1,6 +1,6 @@
 Feature: Board
 
-<<<<<<< HEAD
+
 #  Scenario: Create new Card
 #    Given user is connected to LogIn
 #    And user click on Board Button
