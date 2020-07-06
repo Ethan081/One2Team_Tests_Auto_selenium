@@ -1,13 +1,13 @@
 Feature: Home
 
-  @home
+
   Scenario: disconnect
     Given user is connected to LogIn
     When user select dropdown profile
     And user clicks on Disconnect button
     Then user is redirected to One2Team LogIn page
 
-  @home
+
   Scenario Template:click on button <button>
     Given user is connected to LogIn
     When user clicks on "<button>" "<css>"
