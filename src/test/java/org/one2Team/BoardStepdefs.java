@@ -18,77 +18,39 @@ import static org.one2Team.Hooks.driver;
 
 
 public class BoardStepdefs {
-    /*
-
-    @And("user click on Board Button")
-    public void userClickOnBoardButton() {
-        driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
-        assertTrue(driver.getCurrentUrl().contains("slideboard-new"));
-    }
-
-    @When("user create new card")
-    public void userCreateNewCard() throws InterruptedException {
-        driver.findElement(By.className("add-icon")).click();
-        driver.switchTo().activeElement();
-        driver.findElement(By.className("ant-input")).clear();
-        driver.findElement(By.className("ant-input")).sendKeys("newCard");
-        driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[3]/div/div[2]/button[2]")).click();
-
-    }
-    @Then("card should be create")
-    public void cardShouldBeCreate() {
-        WebElement idCard = driver.findElement(By.xpath("//div[contains(@id,'ogp')]"));
-        //System.out.println(idCard.getText());
-        assertTrue(idCard.isEnabled());
-    }
-
-    @Given("user is connected to LogIn and card created")
-    public void userIsConnectedToLogInAndCardCreated() {
-        driver.get("https://chewie.one2team.com/");
-        driver.findElement(By.id("userName")).clear();
-        driver.findElement(By.id("userName")).sendKeys("etudiant4");
-        driver.findElement(By.id("passWord")).clear();
-        driver.findElement(By.id("passWord")).sendKeys("Etudiant4*");
-        driver.findElement(By.id("domainName")).clear();
-        driver.findElement(By.id("domainName")).sendKeys("telco");
-        driver.findElement(By.cssSelector("#flogin > input[type=submit]")).click();
-        driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
-    }
-
-    @When("user drop card to october column")
-    public void userDropCardToOctoberColumn() throws InterruptedException {
-
-        WebElement drag = driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[1]/div[2]/div[1]"));
-        WebElement drop = driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[6]/div[2]/div[1]"));
-        Actions act = new Actions(driver);
-        act.dragAndDrop(drag, drop).build().perform();
-        Thread.sleep(4000);
-    }
-
-    @Then("card should be prodded to new column")
-    public void cardShouldBeProddedToNewColumn() {
-        assertEquals(driver.findElement(By.id("/ogp/8558138")), driver.findElement(By.id("/ogp/8558138")));
-
-    }
-
-*/
-
+    int divSizeInitial, divSizeFinal;
 
     @And("user is on board page")
-    public void userIsOnBoardPage() throws InterruptedException {
-        driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
-        assertTrue(driver.getCurrentUrl().contains("slideboard-new/a/"));
-        Thread.sleep((5000));
+    public void userIsOnBoardPage()  {
+        while(!driver.getCurrentUrl().contains("slideboard-new/a/")){
+            driver.findElement(By.cssSelector("#root > div > section > aside > div > div > div.module-links-list > a:nth-child(2)")).click();
+        }
     }
 
     @When("user creates a new card")
     public void userCreatesANewCard() throws InterruptedException {
-        driver.findElement(By.cssSelector("#columns-container > div > div.containCol__col.column-animation.col0 > div.containCol__col__plus > div.header.containCol__col__header.ng-scope > div > span")).click();
-        DateTimeFormatter dtf  = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
-        LocalDateTime ldt = LocalDateTime.now();
-        String dateDuJour = ldt.format(dtf);
-        driver.findElement(By.cssSelector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-body > div > div.ant-row.ant-form-item > div.ant-col.ant-form-item-control-wrapper > div > span > input")).sendKeys("new card" + dateDuJour);
-        driver.findElement(By.cssSelector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-footer > div > div.footer-action-buttons > button.ant-btn.ant-btn-primary")).click();
+        DateTimeFormatter dateformat  = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        LocalDateTime localDate = LocalDateTime.now();
+        String dateCardBeCreate = dateformat.format(localDate);
+        driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[1]/div[1]/div[2]/div/span")).click();
+        driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div/span/input")).sendKeys("newCard_" + dateCardBeCreate);
+        driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[3]/div/div[2]/button[2]")).click();
+
         Thread.sleep((5000));
+    }
+
+    @And("user drag&drop card")
+    public void userDragDropCard() throws InterruptedException {
+        Actions actions = new Actions(driver);
+        WebElement from = driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[1]/div[2]/div[1]/div[1]/div/div[2]/div[1]"));
+        WebElement to = driver.findElement(By.cssSelector("#columns-container > div > div.containCol__col.column-animation.col2 > div.containCol__col__card"));
+        actions.dragAndDrop(from, to).build().perform();
+        Thread.sleep(3000);
+    }
+
+    @Then("card is correctly dragged and dropped")
+    public void cardIsCorrectlyDraggedAndDropped() {
+        divSizeFinal = driver.findElements(By.xpath("//*[@id=\"columns-container\"]/div/div[3]/div[2]/div[1]/div")).size();
+        assertTrue(divSizeFinal > divSizeInitial);
     }
 }
