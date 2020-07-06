@@ -71,7 +71,7 @@ public class BoardStepdefs {
 
     }
 
-*/
+ */
 
 
     @And("user is on board page")
@@ -87,8 +87,19 @@ public class BoardStepdefs {
         DateTimeFormatter dtf  = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
         LocalDateTime ldt = LocalDateTime.now();
         String dateDuJour = ldt.format(dtf);
-        driver.findElement(By.cssSelector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-body > div > div.ant-row.ant-form-item > div.ant-col.ant-form-item-control-wrapper > div > span > input")).sendKeys("new card" + dateDuJour);
+        driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div/span/input")).sendKeys("new card" + dateDuJour);
         driver.findElement(By.cssSelector("body > div:nth-child(8) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-footer > div > div.footer-action-buttons > button.ant-btn.ant-btn-primary")).click();
         Thread.sleep((5000));
+    }
+
+    @And("user drag&drop card")
+    public void userDragDropCard() throws InterruptedException {
+        Thread.sleep((5000));
+        WebElement sourceEle = driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[1]/div[2]/div[1]/div[1]"));
+        WebElement targetEle = driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[5]/div[2]/div[1]"));
+        Actions actionProvider = new Actions(driver);
+        actionProvider.dragAndDrop(sourceEle, targetEle).build().perform();
+        Thread.sleep((5000));
+
     }
 }

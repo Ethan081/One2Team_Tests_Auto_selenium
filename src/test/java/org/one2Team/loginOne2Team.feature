@@ -4,8 +4,8 @@ Feature: One2Team LogIn
   @notexecute
   Scenario: User Login
     Given user navigates to "https://chewie.one2team.com/"
-    When user enters "userName" "etudiant4"
-    When user enters "passWord" "Etudiant4*"
+    When user enters "userName" "etudiant6"
+    When user enters "passWord" "Etudiant6*"
     When user enters "domainName" "telco"
     When user clicks on Connect button
     Then user is redirected to One2Team homepage
