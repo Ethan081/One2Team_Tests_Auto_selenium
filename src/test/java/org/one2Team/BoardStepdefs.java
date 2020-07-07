@@ -36,7 +36,7 @@ public class BoardStepdefs {
     @And("user drag&drop card")
     public void userDragDropCard() throws InterruptedException {
         Actions actions = new Actions(driver);
-        WebElement from = driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[1]/div[2]/div[1]/div[1]/div/div[2]/div[1]"));
+        WebElement from = driver.findElement(By.xpath("//*[@id=\"columns-container\"]/div/div[1]/div[2]/div[1]"));
         WebElement to = driver.findElement(By.cssSelector("#columns-container > div > div.containCol__col.column-animation.col2 > div.containCol__col__card"));
         actions.dragAndDrop(from, to).build().perform();
         Thread.sleep(3000);
