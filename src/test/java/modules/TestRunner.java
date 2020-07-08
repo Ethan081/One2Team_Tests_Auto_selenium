@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty", "html:target/html/results.html"},
         features = {"src/test/resources/features"},
-        glue = {"step_definition", "modules"}
-        //tags = "@home"
+        glue = {"step_definition", "modules"},
+        tags = "@home"
 )
 public class TestRunner {
     //Todo: create test run configuration

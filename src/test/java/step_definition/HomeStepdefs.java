@@ -20,9 +20,9 @@ public class HomeStepdefs {
 
         driver.get("https://chewie.one2team.com/");
         driver.findElement(By.id("userName")).clear();
-        driver.findElement(By.id("userName")).sendKeys("etudiant4");
+        driver.findElement(By.id("userName")).sendKeys("*******");
         driver.findElement(By.id("passWord")).clear();
-        driver.findElement(By.id("passWord")).sendKeys("Etudiant4*");
+        driver.findElement(By.id("passWord")).sendKeys("*******");
         driver.findElement(By.id("domainName")).clear();
         driver.findElement(By.id("domainName")).sendKeys("telco");
         driver.findElement(By.cssSelector("#flogin > input[type=submit]")).click();
